@@ -3,23 +3,18 @@ import { Item, List } from './Contacts.styled';
 import { Button, Span } from 'components/Forma/Forma.styled';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { visibleContacts } from 'redux/selectors';
-import { pressDeleteContact } from 'redux/contactsSlice';
-
-
+import { selectVisibleContacts } from 'redux/selectors';
+import { deleteContact } from 'services/services-API';
 
 const Contacts = () => {
-  const contacts = useSelector(visibleContacts);
-
+  const contacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
   return (
     <List>
       {contacts.map(({ id, name, number }) => (
         <Item key={id}>
           {name + ' : ' + number}
-          <Button type="button"
-            onClick={() => dispatch(pressDeleteContact(id))}
-          >
+          <Button type="button" onClick={() => dispatch(deleteContact(id))}>
             <Span>Delete</Span>
           </Button>
         </Item>
@@ -27,7 +22,5 @@ const Contacts = () => {
     </List>
   );
 };
-
-
 
 export default Contacts;
