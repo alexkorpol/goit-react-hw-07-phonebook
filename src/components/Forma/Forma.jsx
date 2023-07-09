@@ -4,8 +4,7 @@ import { nanoid } from 'nanoid';
 import { Button, Form, Input, Label, Span } from './Forma.styled';
 import { Notify } from 'notiflix';
 import { selectVisibleContacts } from 'redux/selectors';
-import { addContact, fetchAll } from 'services/services-API';
-
+import { addContact, fetchContacts } from 'services/services-API';
 
 export default function Forma() {
   const contacts = useSelector(selectVisibleContacts);
@@ -23,7 +22,7 @@ export default function Forma() {
   const { nameNew, numberNew } = state;
 
   useEffect(() => {
-    dispatch(fetchAll());
+    dispatch(fetchContacts());
   }, [dispatch]);
 
   const handleChange = nameValueInput => event => {
@@ -114,4 +113,3 @@ export default function Forma() {
     </Form>
   );
 }
-
